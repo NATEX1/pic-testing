@@ -32,7 +32,9 @@ else:
         
         pages = [
             st.Page("_pages/home.py"),
-            st.Page("_pages/students.py")
+            st.Page("_pages/students.py"),
+            st.Page("_pages/teachers.py"),
+
         ]
         pg = st.navigation(pages, position="hidden")
         pg.run()
@@ -40,3 +42,6 @@ else:
         with st.sidebar:
             st.page_link(st.Page("_pages/home.py"), label="หน้าแรก",  icon=":material/home:")
             st.page_link(st.Page("_pages/students.py"), label="นักศึกษา",  icon=":material/people:")
+            st.page_link(st.Page("_pages/teachers.py"), label="ครู",  icon=":material/people:")
+
+
