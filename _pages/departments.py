@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import db
+import time
 
 #fetching data
 departments = pd.DataFrame(db.query("SELECT * FROM departments"))
@@ -9,7 +10,7 @@ departments = pd.DataFrame(db.query("SELECT * FROM departments"))
 st.title(":red[แผนก]")
 st.divider()
 
-uploaded_file  = st.file_uploader("", type = ["csv", "xlsx"])
+uploaded_file  = st.file_uploader("", type="csv")
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
@@ -17,27 +18,36 @@ if uploaded_file:
 
     if st.button("เพิ่มข้อมูล"):
 
-        df = pd.read_csv(uploaded_file)
+        for _, row in df.iterrows():
+            sql = "INSERT INTO departments(department_id, name) VALUES (%s, %s)"
+            db.execute(sql, (row['department_id'], row['name']))
+            
+        st.success("นำเข้าข้อมูลสำเร็จ")
+        time.sleep(1.5)
+        st.rerun()
 
-        for rows in df.iterrows():
-
-
-
-
-    st.success("เพิ่มข้อมูลเสร็จสิ้น")
+    
 
 # #Filter
-# filter_df = teachers.copy()
-#
-# col1, col2, col3 = st.columns(3)
-#
-# with col1:
-#     st.selectbox("ครู", options=filter_df['teacher_id'])
+filter_df = departments.copy()
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.selectbox("ครู", options=filter_df['teacher_id'])
 
 table = st.data_editor(departments, num_rows="dynamic" , column_config={
     "department_id": st.column_config.TextColumn('รหัสแผนก', required=True),
     "name": st.column_config.TextColumn("แผนก", required=True),
 } )
 
-if table
-
+if not table.equals(departments) and st.button('บันทึกการแก้ไข', type="primary"):
+    for _, row in table.iterrows():
+        old = departments.iloc[_]
+        
+        if not row.equals(old):
+            db.execute("UPDATE departments SET name = %s, WHERE department_id = %s", (row['name'], row['department_id']))
+    
+    st.success("บันทึกสำเร็จ!")
+    time.sleep(1.5)
+    st.rerun()
