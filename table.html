@@ -12,7 +12,7 @@
       }
 
       @media print {
-        body * {
+        * {
           visibility: hidden;
         }
 
@@ -46,9 +46,7 @@
     </style>
   </head>
   <body>
-    <button onclick="window.print()">
-        export
-    </button>
+    <button onclick="window.print()">export</button>
     <div
       style="
         background-color: white;
@@ -60,11 +58,11 @@
       "
     >
       <table id="export-area">
-        <tr>
+        <!-- <tr>
           <td colspan="13">
             <h1 style="text-align: center">ตาราง</h1>
           </td>
-        </tr>
+        </tr> -->
         <tr>
           <td colspan="3" rowspan="8">
             <div
@@ -128,92 +126,92 @@
         </tr>
         <tr style="text-align: center">
           <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
-          <td>08:00-09:00</td>
+          <td>09:00-10:00</td>
+          <td>10:00-11:00</td>
+          <td>11:00-12:00</td>
+          <td>12:00-13:00</td>
+          <td>13:00-14:00</td>
+          <td>14:00-15:00</td>
+          <td>15:00-16:00</td>
+          <td>16:00-17:00</td>
+          <td>17:00-18:00</td>
+          <td>18:00-19:00</td>
+          <td>19:00-20:00</td>
         </tr>
-        <tr style="text-align: center">
+        <tr style="text-align: center" id="row-mon">
           <td>จันทร์</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
+          <td>{{mon1}}</td>
+          <td>{{mon2}}</td>
+          <td>{{mon3}}</td>
+          <td>{{mon4}}</td>
+          <td>{{mon5}}</td>
+          <td>{{mon6}}</td>
+          <td>{{mon7}}</td>
+          <td>{{mon8}}</td>
+          <td>{{mon9}}</td>
+          <td>{{mon10}}</td>
+          <td>{{mon11}}</td>
+          <td>{{mon12}}</td>
         </tr>
-        <tr style="text-align: center">
-          <td>จันทร์</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
+        <tr style="text-align: center" id="row-tue">
+          <td>อังคาร</td>
+          <td>{{tue1}}</td>
+          <td>{{tue2}}</td>
+          <td>{{tue3}}</td>
+          <td>{{tue4}}</td>
+          <td>{{tue5}}</td>
+          <td>{{tue6}}</td>
+          <td>{{tue7}}</td>
+          <td>{{tue8}}</td>
+          <td>{{tue9}}</td>
+          <td>{{tue10}}</td>
+          <td>{{tue11}}</td>
+          <td>{{tue12}}</td>
         </tr>
-        <tr style="text-align: center">
-          <td>จันทร์</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
+        <tr style="text-align: center" id="row-wed">
+          <td>พุธ</td>
+          <td>{{wed1}}</td>
+          <td>{{wed2}}</td>
+          <td>{{wed3}}</td>
+          <td>{{wed4}}</td>
+          <td>{{wed5}}</td>
+          <td>{{wed6}}</td>
+          <td>{{wed7}}</td>
+          <td>{{wed8}}</td>
+          <td>{{wed9}}</td>
+          <td>{{wed10}}</td>
+          <td>{{wed11}}</td>
+          <td>{{wed12}}</td>
         </tr>
-        <tr style="text-align: center">
-          <td>จันทร์</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
+        <tr style="text-align: center" id="row-thu">
+          <td>พฤหัสบดี</td>
+          <td>{{thu1}}</td>
+          <td>{{thu2}}</td>
+          <td>{{thu3}}</td>
+          <td>{{thu4}}</td>
+          <td>{{thu5}}</td>
+          <td>{{thu6}}</td>
+          <td>{{thu7}}</td>
+          <td>{{thu8}}</td>
+          <td>{{thu9}}</td>
+          <td>{{thu10}}</td>
+          <td>{{thu11}}</td>
+          <td>{{thu12}}</td>
         </tr>
-        <tr style="text-align: center">
-          <td>จันทร์</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
-          <td>ภาษาไทย</td>
+        <tr style="text-align: center" id="row-fri">
+          <td>ศุกร์</td>
+          <td>{{fri1}}</td>
+          <td>{{fri2}}</td>
+          <td>{{fri3}}</td>
+          <td>{{fri4}}</td>
+          <td>{{fri5}}</td>
+          <td>{{fri6}}</td>
+          <td>{{fri7}}</td>
+          <td>{{fri8}}</td>
+          <td>{{fri9}}</td>
+          <td>{{fri10}}</td>
+          <td>{{fri11}}</td>
+          <td>{{fri12}}</td>
         </tr>
       </table>
     </div>

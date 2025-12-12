@@ -1,5 +1,11 @@
 import pymysql 
 
+# host="147.50.254.12",
+# user="finorfin_pic",
+# password="G5F&2!taRct9sdyv",
+# database="pic_2",
+# cursorclass=pymysql.cursors.DictCursor
+
 def get_conn():
     return pymysql.connect(
         host="147.50.254.12",
