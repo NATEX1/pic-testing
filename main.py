@@ -34,6 +34,13 @@ else:
             st.Page("_pages/home.py"),
             st.Page("_pages/students.py"),
             st.Page("_pages/teachers.py"),
+            st.Page("_pages/departments.py"),
+            st.Page("_pages/subjects.py"),
+            st.Page("_pages/classrooms.py"),
+            st.Page("_pages/groups.py"),
+            st.Page("_pages/schedules.py"),
+            st.Page("_pages/study_plans.py"),
+            st.Page("_pages/lesson_plans.py")
 
         ]
         pg = st.navigation(pages, position="hidden")
@@ -41,7 +48,12 @@ else:
         
         with st.sidebar:
             st.page_link(st.Page("_pages/home.py"), label="หน้าแรก",  icon=":material/home:")
-            st.page_link(st.Page("_pages/students.py"), label="นักศึกษา",  icon=":material/people:")
+            st.page_link(st.Page("_pages/students.py"), label="นักศึกษา",  icon=":material/groups_3:")
             st.page_link(st.Page("_pages/teachers.py"), label="ครู",  icon=":material/people:")
-
-
+            st.page_link(st.Page("_pages/departments.py"), label="แผนก",  icon=":material/domain:")
+            st.page_link(st.Page("_pages/subjects.py"), label="วิชา",  icon=":material/book:")
+            st.page_link(st.Page("_pages/classrooms.py"), label="ห้องเรียน",  icon=":material/door_front:")
+            st.page_link(st.Page("_pages/groups.py"), label="กลุ่ม",  icon=":material/groups:")
+            st.page_link(st.Page("_pages/schedules.py"), label="ตาราง",  icon=":material/table:")
+            st.page_link(st.Page("_pages/study_plans.py"), label="แผนการเรียน",  icon=":material/school:")
+            st.page_link(st.Page("_pages/lesson_plans.py"), label="แผนการสอน",  icon=":material/dictionary:")
