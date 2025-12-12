@@ -4,6 +4,11 @@ import db
 st.title(":red[ตาราง]")
 st.divider()
 
+groups = db.query("SELECT group_id, name FROM groups")
+group_options = [g["group_id"] for g in groups]  
+group = st.selectbox('เลือกรหัสกลุ่ม', options=group_options)
+group_data = db.fetch_one("SELECT * FROM groups WHERE group_id = %s", (group))
+
 file_path = "table.html"
 
 rows = db.query("""
@@ -21,7 +26,7 @@ rows = db.query("""
     WHERE TRIM(lp.group_id) = %s
     ORDER BY tr.day, tr.period;
     """
-, ("662090101",))
+, (group,))
 
 # แปลง day = ตัวเลข → ชื่อวัน
 day_map = {
@@ -47,11 +52,15 @@ for r in rows:
     day = day_map.get(day_num)
     period = int(r["period"])
 
+    # ข้ามพักเที่ยง
+    if period == 5:
+        table_data[day][period] = "พักเที่ยง"
+        continue
+
     if day in table_data and period in table_data[day]:
         table_data[day][period] = f"""
-        {r["subject_name"]} \n
+        {r["subject_name"]} <br />
         {r["s_id"]}
-        
         """ or "-"
 
 # โหลด HTML template
@@ -74,5 +83,27 @@ for day in table_data:
     for period in table_data[day]:
         placeholder = f"{{{{{short}{period}}}}}"
         html = html.replace(placeholder, table_data[day][period])
+        
+subjects = db.query("""
+    SELECT DISTINCT s.name AS subject_name, s.subject_id AS subject_code, s.t_p_c
+    FROM lesson_plans lp
+    LEFT JOIN subjects s ON TRIM(lp.subject_id) = TRIM(s.subject_id)
+    WHERE TRIM(lp.group_id) = %s
+    ORDER BY s.subject_id
+""", (group,))
 
-st.components.v1.html(html, height=600, scrolling=True)
+# เตรียม list ของ placeholder sub1-sub14
+sub_placeholders = [f"sub{i}" for i in range(1, 15)]
+
+for i, placeholder in enumerate(sub_placeholders):
+    if i < len(subjects):
+        sub_text = f"({subjects[i]['subject_code']}) {subjects[i]['subject_name']} ({subjects[i]['t_p_c']})"
+    else:
+        sub_text = ""
+    html = html.replace(f"{{{{{placeholder}}}}}", sub_text)
+
+html = html.replace(f"{{{{{"term"}}}}}", "2/2568")
+html = html.replace(f"{{{{{"group_id"}}}}}", group)
+html = html.replace(f"{{{{{"group_name"}}}}}", group_data["name"])
+
+st.components.v1.html(html, height=600)
