@@ -10,6 +10,16 @@ departments = pd.DataFrame(db.query("SELECT * FROM departments"))
 st.title(":red[แผนก]")
 st.divider()
 
+with open("preview_data/departments.csv", "rb") as file:
+    st.download_button(
+        label="ดาวโหลดไฟล์ตัวอย่าง",
+        data=file,
+        file_name="department.csv",
+        mime="text/csv",
+        type = "primary"
+    )
+
+
 uploaded_file  = st.file_uploader("", type="csv")
 
 if uploaded_file:
@@ -33,8 +43,8 @@ filter_df = departments.copy()
 
 col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.selectbox("ครู", options=filter_df['teacher_id'])
+# with col1:
+    # st.selectbox("ครู", options=filter_df['department_id'].unique())
 
 table = st.data_editor(departments, num_rows="dynamic" , column_config={
     "department_id": st.column_config.TextColumn('รหัสแผนก', required=True),
