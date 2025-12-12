@@ -11,23 +11,58 @@ if not (controller.get('username') and controller.get('role')):
     
     tab1, tab2, tab3 = st.tabs(["นักศึกษา", "อาจารย์", "ผุ้ดูแล"])
     
+    with tab1:
+        with st.form('student_form'):
+            username = st.text_input(label='รหัสนักศึกษา')
+            password = st.text_input(label='รหัสผ่าน', type="password")
+            
+            if st.form_submit_button('เข้าสู่ระบบ', type="primary"):
+                user = db.fetch_one("SELECT * FROM students WHERE student_id = %s AND idcard = %s", (username, password))
+                
+                if user:
+                    st.success("เข้าสู่ระบบสำเร็จ!")
+                    controller.set("username", username)
+                    controller.set("role", "student")
+                    time.sleep(1.5)
+                    st.rerun()
+                else:
+                    st.error("รหัสไม่ถูกต้อง")
+    
+    with tab2:
+        with st.form('teacher_form'):
+            username = st.text_input(label='รหัสอาจารย์')
+            password = st.text_input(label='รหัสผ่าน', type="password")
+            
+            if st.form_submit_button('เข้าสู่ระบบ', type="primary"):
+                user = db.fetch_one("SELECT * FROM teachers WHERE teacher_id = %s AND idcard = %s", (username, password))
+                
+                if user:
+                    st.success("เข้าสู่ระบบสำเร็จ!")
+                    controller.set("username", username)
+                    controller.set("role", "teacher")
+                    time.sleep(1.5)
+                    st.rerun()
+                else:
+                    st.error("รหัสไม่ถูกต้อง")
+    
     with tab3:
-        
         with st.form('admin_form'):
             username = st.text_input(label='ชื่อผู้ใช้')
-            password = st.text_input(label='รหัสผ่าน')
+            password = st.text_input(label='รหัสผ่าน', type="password")
             
             if st.form_submit_button('เข้าสู่ระบบ', type="primary"):
                 if username == "admin" and password == "123456":
+                    st.success("เข้าสู่ระบบสำเร็จ!")
                     controller.set("username", "admin")
                     controller.set("role", "admin")
-                    
                     time.sleep(1.5)
                     st.rerun()
+                else:
+                    st.error("รหัสไม่ถูกต้อง")
                     
                     
 else: 
-    
+    st.set_page_config(layout="wide")
     if controller.get("role") and controller.get("role") == "admin":
         
         pages = [
@@ -57,3 +92,8 @@ else:
             st.page_link(st.Page("_pages/schedules.py"), label="ตาราง",  icon=":material/table:")
             st.page_link(st.Page("_pages/study_plans.py"), label="แผนการเรียน",  icon=":material/school:")
             st.page_link(st.Page("_pages/lesson_plans.py"), label="แผนการสอน",  icon=":material/dictionary:")
+            
+            st.divider()
+            
+            st.page_link(st.Page("_pages/logout.py"), label="ออกจากระบบ", icon=":material/logout:")
+
